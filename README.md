@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# HexCMS Studio
 
-## Getting Started
+A modern, themeable markdown CMS editor for managing your content repositories locally. Built with Next.js 15, featuring visual WYSIWYG editing, Git integration, and multi-repository support.
 
-First, run the development server:
+> **Note**: HexCMS Studio is designed to run locally on your machine. It requires direct filesystem access to read and write your content files, and cannot be deployed to cloud platforms like Vercel.
+
+## Features
+
+- **Visual & Code Editing** - Switch between WYSIWYG (TipTap) and raw markdown editing
+- **Multi-Repository Support** - Connect and manage multiple local Git repositories
+- **Frontmatter Editor** - Edit post metadata with a user-friendly form interface
+- **Live Preview** - Real-time markdown preview with syntax highlighting
+- **Git Integration** - Stage, commit, push, and pull directly from the UI
+- **File Browser** - Navigate filesystem to add repositories easily
+- **Multi-Theme Support** - Light, Dark, Midnight, and Sepia themes
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- Git
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/alamb-hex/hexcms-studio.git
+cd hexcms-studio
+
+# Install dependencies
+npm install
+
+# Start the editor
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to start editing.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Add Your First Repository
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Click **+ Add Repo** in the header
+2. Click **Browse** to navigate to your content folder
+3. Optionally set a **Content Path** (e.g., `content`, `docs`, `posts`)
+4. Click **Add Repository**
 
-## Learn More
+## Documentation
 
-To learn more about Next.js, take a look at the following resources:
+| Document | Description |
+|----------|-------------|
+| [Installation Guide](docs/INSTALLATION.md) | Detailed setup instructions |
+| [User Guide](docs/USER_GUIDE.md) | How to use HexCMS Studio |
+| [Theme System](docs/THEMING.md) | Customizing themes |
+| [Components](docs/COMPONENTS.md) | Developer documentation |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Framework**: Next.js 15 (App Router)
+- **Styling**: Tailwind CSS v4
+- **WYSIWYG Editor**: TipTap
+- **Code Editor**: CodeMirror 6
+- **Markdown**: marked + DOMPurify
+- **Git**: simple-git
 
-## Deploy on Vercel
+## Configuration
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Repository settings are stored in `~/.hexcms-studio/config.json`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Optional environment variables (`.env.local`):
+
+```env
+PORT=3000
+```
+
+## Why Local Only?
+
+HexCMS Studio needs direct access to your filesystem to:
+- Read and write markdown files in your repositories
+- Execute Git commands (commit, push, pull)
+- Browse directories when adding new repositories
+
+This makes it ideal for local content management but incompatible with serverless deployments.
+
+## License
+
+MIT
