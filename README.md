@@ -4,6 +4,8 @@ A modern, themeable markdown CMS editor for managing your content repositories l
 
 > **Note**: HexCMS Studio is designed to run locally on your machine. It requires direct filesystem access to read and write your content files, and cannot be deployed to cloud platforms like Vercel.
 
+![HexCMS Studio Screenshot](screenshot.png)
+
 ## Features
 
 - **Visual & Code Editing** - Switch between WYSIWYG (TipTap) and raw markdown editing
