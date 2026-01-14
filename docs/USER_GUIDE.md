@@ -211,6 +211,7 @@ Click **Visual** or **Code** in the header toolbar to switch between modes.
 | " Quote | Blockquote | - |
 | Link | Insert link | Ctrl/Cmd + K |
 | Image | Insert image | - |
+| YouTube | Embed YouTube video | - |
 | Code Block | Code block | - |
 | Undo | Undo change | Ctrl/Cmd + Z |
 | Redo | Redo change | Ctrl/Cmd + Shift + Z |
@@ -238,10 +239,25 @@ Click **Visual** or **Code** in the header toolbar to switch between modes.
 ### Adding Images
 
 1. Click **Image** in the toolbar
-2. Enter the image URL
-3. Click **Insert**
+2. Choose to upload from your computer or enter an image URL
+3. For uploads, the image is saved to your post's `images/` folder
+4. Click **Insert**
 
 > **Tip**: For local images, use relative paths like `./images/photo.jpg`
+
+### Embedding YouTube Videos
+
+1. Click **YouTube** in the toolbar
+2. Paste a YouTube video URL
+3. Click **Insert Video**
+
+**Supported URL formats:**
+- `https://www.youtube.com/watch?v=VIDEO_ID`
+- `https://youtu.be/VIDEO_ID`
+
+The video URL will be inserted as text in your document. When your blog renders the markdown, it will automatically convert to a responsive embedded video player.
+
+> **Note**: The embed conversion happens during rendering via the `rehype-youtube` plugin. In the editor preview, you'll see the URL as text.
 
 ### Blockquotes
 

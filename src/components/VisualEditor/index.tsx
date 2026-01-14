@@ -118,7 +118,9 @@ export function VisualEditor({
   activePath,
 }: VisualEditorProps) {
   const [showImageModal, setShowImageModal] = useState(false);
+  const [showYouTubeModal, setShowYouTubeModal] = useState(false);
   const [imageUrl, setImageUrl] = useState("");
+  const [youtubeUrl, setYoutubeUrl] = useState("");
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -225,10 +227,11 @@ export function VisualEditor({
 
       const data = await response.json();
       // Set both display src (API path) and markdown src (relative path)
+      // Type assertion needed because TipTap's setImage doesn't know about our custom attribute
       editor.chain().focus().setImage({
         src: data.path,
         "data-markdown-src": data.markdownPath
-      }).run();
+      } as { src: string; alt?: string; title?: string }).run();
       setShowImageModal(false);
       setImageUrl("");
     } catch (error) {
@@ -255,6 +258,37 @@ export function VisualEditor({
 
   const openImageModal = useCallback(() => {
     setShowImageModal(true);
+  }, []);
+
+  // YouTube URL validation regex - matches youtube.com/watch?v= and youtu.be/ formats
+  const YOUTUBE_REGEX = /^https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})(?:[?&].*)?$/;
+
+  const addYouTubeVideo = useCallback(() => {
+    if (!editor || !youtubeUrl) return;
+
+    // Validate YouTube URL
+    const match = youtubeUrl.trim().match(YOUTUBE_REGEX);
+    if (!match) {
+      alert("Please enter a valid YouTube URL.\n\nSupported formats:\n• https://www.youtube.com/watch?v=VIDEO_ID\n• https://youtu.be/VIDEO_ID");
+      return;
+    }
+
+    // Insert the URL on its own paragraph
+    // The rehype-youtube plugin will convert this to an embed when rendered
+    editor
+      .chain()
+      .focus()
+      .insertContent([
+        { type: "paragraph", content: [{ type: "text", text: youtubeUrl.trim() }] },
+      ])
+      .run();
+
+    setShowYouTubeModal(false);
+    setYoutubeUrl("");
+  }, [editor, youtubeUrl]);
+
+  const openYouTubeModal = useCallback(() => {
+    setShowYouTubeModal(true);
   }, []);
 
   if (!editor) {
@@ -359,6 +393,9 @@ export function VisualEditor({
         </ToolbarButton>
         <ToolbarButton onClick={openImageModal} title="Add Image">
           Image
+        </ToolbarButton>
+        <ToolbarButton onClick={openYouTubeModal} title="Embed YouTube Video">
+          YouTube
         </ToolbarButton>
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
@@ -478,6 +515,67 @@ export function VisualEditor({
                 className="px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
               >
                 Insert URL
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* YouTube embed modal */}
+      {showYouTubeModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-background rounded-lg p-6 w-96 shadow-xl">
+            <h3 className="text-lg font-semibold mb-4">Embed YouTube Video</h3>
+
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-2">
+                YouTube URL
+              </label>
+              <input
+                type="text"
+                value={youtubeUrl}
+                onChange={(e) => setYoutubeUrl(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    addYouTubeVideo();
+                  }
+                }}
+                placeholder="https://www.youtube.com/watch?v=..."
+                className="w-full px-3 py-2 border border-border rounded bg-background"
+                autoFocus
+              />
+              <p className="text-xs text-muted-foreground mt-2">
+                Paste a YouTube URL. It will automatically become an embedded video when published.
+              </p>
+            </div>
+
+            <div className="bg-muted/50 rounded p-3 mb-4">
+              <p className="text-xs text-muted-foreground">
+                <strong>Supported formats:</strong>
+              </p>
+              <ul className="text-xs text-muted-foreground mt-1 space-y-1">
+                <li>• youtube.com/watch?v=VIDEO_ID</li>
+                <li>• youtu.be/VIDEO_ID</li>
+              </ul>
+            </div>
+
+            <div className="flex justify-end gap-3">
+              <button
+                onClick={() => {
+                  setShowYouTubeModal(false);
+                  setYoutubeUrl("");
+                }}
+                className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={addYouTubeVideo}
+                disabled={!youtubeUrl}
+                className="px-4 py-2 text-sm bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50"
+              >
+                Insert Video
               </button>
             </div>
           </div>

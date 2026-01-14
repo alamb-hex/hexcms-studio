@@ -81,7 +81,8 @@ interface VisualEditorProps {
 | 1. List | Numbered list |
 | " Quote | Blockquote |
 | Link | Insert/edit link |
-| Image | Insert image (URL dialog) |
+| Image | Insert image (upload or URL) |
+| YouTube | Embed YouTube video (URL dialog) |
 | Code Block | Code block |
 | Undo/Redo | History navigation |
 
@@ -212,6 +213,7 @@ interface FileNode {
 - File type icons (📝 for markdown, 📄 for other files)
 - Active file highlighting
 - Repository name display
+- Footer branding with Hexaxia Technologies logo and GitHub link
 
 ## GitPanel
 
