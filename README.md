@@ -1,6 +1,6 @@
 # HexCMS Studio
 
-A modern, themeable markdown CMS editor for managing your content repositories locally. Built with Next.js 15, featuring visual WYSIWYG editing, Git integration, and multi-repository support.
+A modern, themeable markdown CMS editor for managing your content repositories locally. Built with Next.js 16, featuring visual WYSIWYG editing, Git integration, and multi-repository support.
 
 > **Note**: HexCMS Studio is designed to run locally on your machine. It requires direct filesystem access to read and write your content files, and cannot be deployed to cloud platforms like Vercel.
 
@@ -9,6 +9,7 @@ A modern, themeable markdown CMS editor for managing your content repositories l
 ## Features
 
 - **Visual & Code Editing** - Switch between WYSIWYG (TipTap) and raw markdown editing
+- **YouTube Embeds** - Paste YouTube URLs directly; auto-converted to responsive embeds
 - **Multi-Repository Support** - Connect and manage multiple local Git repositories
 - **Frontmatter Editor** - Edit post metadata with a user-friendly form interface
 - **Live Preview** - Real-time markdown preview with syntax highlighting
@@ -57,7 +58,7 @@ Open [http://localhost:3000](http://localhost:3000) to start editing.
 
 ## Tech Stack
 
-- **Framework**: Next.js 15 (App Router)
+- **Framework**: Next.js 16 (App Router, Turbopack)
 - **Styling**: Tailwind CSS v4
 - **WYSIWYG Editor**: TipTap
 - **Code Editor**: CodeMirror 6
