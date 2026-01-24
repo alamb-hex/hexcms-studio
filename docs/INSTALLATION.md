@@ -140,12 +140,12 @@ npm comes with Node.js, but you can also use alternatives:
 
 **pnpm (faster, efficient):**
 ```bash
-npm install -g pnpm
+pnpm install -g pnpm
 ```
 
 **yarn:**
 ```bash
-npm install -g yarn
+pnpm install -g yarn
 ```
 
 **bun (fastest):**
@@ -191,12 +191,12 @@ Choose your package manager:
 
 **Using npm (default):**
 ```bash
-npm install
+pnpm install
 ```
 
 **Using pnpm:**
 ```bash
-pnpm install
+ppnpm install
 ```
 
 **Using yarn:**
@@ -227,7 +227,7 @@ found 0 vulnerabilities
 For production use, build the optimized version:
 
 ```bash
-npm run build
+pnpm build
 ```
 
 This creates an optimized production build in the `.next` folder.
@@ -275,7 +275,7 @@ DEBUG=true
 For local development with hot-reload:
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 **Using other package managers:**
@@ -304,7 +304,7 @@ For production deployment:
 
 ```bash
 # Build first (if not already built)
-npm run build
+pnpm build
 
 # Start the production server
 npm start
@@ -403,10 +403,10 @@ cd /path/to/hexcms-studio
 git pull origin main
 
 # Install any new dependencies
-npm install
+pnpm install
 
 # Rebuild if needed
-npm run build
+pnpm build
 ```
 
 ### Manual Update
@@ -415,8 +415,8 @@ npm run build
 2. Back up your `.env.local` file
 3. Replace the project files
 4. Restore your `.env.local`
-5. Run `npm install`
-6. Run `npm run build` (for production)
+5. Run `pnpm install`
+6. Run `pnpm build` (for production)
 
 ---
 
@@ -453,7 +453,7 @@ source ~/.bashrc
 **Solution**:
 ```bash
 # Option 1: Use a different port
-PORT=3001 npm run dev
+PORT=3001 pnpm dev
 
 # Option 2: Kill the process using port 3000
 # macOS/Linux:
@@ -472,7 +472,7 @@ taskkill /PID <PID> /F
 # Remove node_modules and reinstall
 rm -rf node_modules
 rm package-lock.json  # or pnpm-lock.yaml, yarn.lock
-npm install
+pnpm install
 ```
 
 #### Build fails with memory error
@@ -482,7 +482,7 @@ npm install
 **Solution**:
 ```bash
 # Increase Node.js memory limit
-NODE_OPTIONS="--max-old-space-size=4096" npm run build
+NODE_OPTIONS="--max-old-space-size=4096" pnpm build
 ```
 
 #### Git features not working
@@ -531,11 +531,11 @@ After successful installation:
 
 | Command | Description |
 |---------|-------------|
-| `npm install` | Install dependencies |
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm start` | Start production server |
-| `npm run lint` | Run code linting |
+| `pnpm install` | Install dependencies |
+| `pnpm dev` | Start development server |
+| `pnpm build` | Build for production |
+| `pnpm start` | Start production server |
+| `pnpm lint` | Run code linting |
 
 ### Default URLs
 
