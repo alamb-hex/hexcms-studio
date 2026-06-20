@@ -4,7 +4,8 @@ import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypeStringify from "rehype-stringify";
 import rehypeHighlight from "rehype-highlight";
-import matter from "gray-matter";
+import { VFile } from "vfile";
+import { matter as parseVFileMatter } from "vfile-matter";
 
 export interface ParsedMarkdown {
   frontmatter: Record<string, unknown>;
@@ -21,7 +22,10 @@ export interface RenderedMarkdown {
  * Parse markdown file content into frontmatter and body
  */
 export function parseMarkdown(content: string): ParsedMarkdown {
-  const { data, content: body } = matter(content);
+  const file = new VFile(content);
+  parseVFileMatter(file, { strip: true });
+  const data = (file.data.matter ?? {}) as Record<string, unknown>;
+  const body = String(file);
   return {
     frontmatter: data,
     body,

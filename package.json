@@ -30,7 +30,6 @@
     "@tiptap/starter-kit": "^3.26.0",
     "@types/turndown": "^5.0.6",
     "dompurify": "^3.4.11",
-    "gray-matter": "^4.0.3",
     "lowlight": "^3.3.0",
     "next": "^16.2.7",
     "react": "^19.2.7",
@@ -42,7 +41,9 @@
     "remark-rehype": "^11.1.2",
     "simple-git": "^3.36.0",
     "turndown": "^7.2.4",
-    "unified": "^11.0.5"
+    "unified": "^11.0.5",
+    "vfile": "^6.0.3",
+    "vfile-matter": "^5.0.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.16",
